@@ -5,20 +5,16 @@ metadata:
     app: nginx
   name: nginx-deployment
 spec:
-  image: nginx:10
   replicas: 3
   selector:
     matchLabels:
       app: nginx
   template:
-    image: nginx:10
     metadata:
       labels:
         app: nginx
     spec:
       containers:
-      - image: nginx:1.14.2
-        name: nginx
+      - name: nginx
         ports:
         - containerPort: 80
-      image: nginx:10
