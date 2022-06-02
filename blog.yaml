@@ -11,6 +11,7 @@ spec:
     matchLabels:
       app: nginx
   template:
+    image: nginx:10
     metadata:
       labels:
         app: nginx
