@@ -19,7 +19,7 @@ spec:
   hosts:
     - "*.fluytcloud.com"
   gateways:
-    - blog-gateway
+    - bookinfo-gateway
   http:
     - match:
       - uri:
