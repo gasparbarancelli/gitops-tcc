@@ -21,10 +21,7 @@ spec:
         version: v1
     spec:
       containers:
-      - envFrom:
-        - configMapRef:
-            name: blog
-        image: gasparbarancelli/blog:103
+      - image: gasparbarancelli/blog:103
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 2
