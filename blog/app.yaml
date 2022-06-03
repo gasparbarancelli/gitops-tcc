@@ -21,7 +21,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: gasparbarancelli/blog:104
+      - image: gasparbarancelli/blog:105
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 2
