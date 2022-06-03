@@ -28,5 +28,3 @@ spec:
         - destination:
             host: blog.tcc.svc.cluster.local
             subset: v1
-            port:
-              number: 8080
