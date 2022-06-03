@@ -26,7 +26,7 @@ spec:
         livenessProbe:
           failureThreshold: 2
           httpGet:
-            path: /actuator/health
+            path: /blog/actuator/health
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 60
@@ -37,7 +37,7 @@ spec:
         - containerPort: 8080
         readinessProbe:
           httpGet:
-            path: /actuator/health
+            path: /blog/actuator/health
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 10
