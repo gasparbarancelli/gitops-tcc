@@ -24,8 +24,6 @@ spec:
     - match:
       - uri:
         prefix: /blog/
-      rewrite:
-        uri: "/"  
       route:
         - destination:
             host: blog.tcc.svc.cluster.local
