@@ -15,7 +15,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx:100
+      - image: nginx:101
         name: nginx
         ports:
         - containerPort: 80
