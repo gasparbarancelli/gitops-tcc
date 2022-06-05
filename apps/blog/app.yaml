@@ -1,1 +1,51 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blog
+    version: v1
+  name: blog-v1
+  namespace: tcc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: blog
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: blog
+        component: blog
+        version: v1
+    spec:
+      containers:
+      - image: gasparbarancelli/blog:105
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /blog/actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: blog
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /blog/actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 600m
+            memory: 700Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
