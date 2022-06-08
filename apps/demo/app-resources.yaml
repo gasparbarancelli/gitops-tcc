@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  namespace: demo
+spec:
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - image: gasparbarancelli/blog:108
+        imagePullPolicy: IfNotPresent
+        name: blog
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 600m
+            memory: 700Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
