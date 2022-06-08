@@ -1,1 +1,28 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fluytcloud
+  namespace: fluytcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fluytcloud
+  template:
+    metadata:
+      labels:
+        app: fluytcloud
+    spec:
+      containers:
+      - image: eltonmmoreira/fluytcloud:1.0
+        imagePullPolicy: Always
+        name: fluytcloud
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 600m
+            memory: 700Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi

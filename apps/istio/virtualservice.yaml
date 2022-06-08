@@ -1,0 +1,75 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: bookinfo
+  namespace: istio-system
+spec:
+  gateways:
+    - bookinfo-gateway
+  hosts:
+    - 'istio.fluytcloud.com'
+  http:
+    - match:
+        - uri:
+            prefix: /kiali
+      route:
+        - destination:
+            host: kiali.observability.svc.cluster.local
+            port:
+              number: 20001
+    - match:
+        - uri:
+            prefix: /jaeger
+      route:
+        - destination:
+            host: tracing.observability.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: /grafana
+      route:
+        - destination:
+            host: grafana.observability.svc.cluster.local
+            port:
+              number: 3000
+    - match:
+        - uri:
+            prefix: /prometheus
+      route:
+        - destination:
+            host: prometheus.observability.svc.cluster.local
+            port:
+              number: 9090
+    - match:
+        - uri:
+            prefix: /blog/
+      route:
+        - destination:
+            host: blog.tcc.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: /argocd/
+      route:
+        - destination:
+            host: argocd-server.argocd.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            exact: /productpage
+        - uri:
+            prefix: /api/v1/products
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: productpage.bookinfo.svc.cluster.local
+            port:
+              number: 9080
