@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  namespace: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - image: gasparbarancelli/blog:108
+        imagePullPolicy: IfNotPresent
+        name: blog
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /blog/actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /blog/actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 600m
+            memory: 700Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
