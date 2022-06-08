@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  namespace: demo
+spec:
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - image: gasparbarancelli/blog:108
+        imagePullPolicy: IfNotPresent
+        name: blog
+        ports:
+        - containerPort: 8080
